@@ -1,0 +1,42 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Movie {
+  id       Int      @id @default(autoincrement())
+  title    String
+  synopsis String
+  reviews  Review[]
+}
+
+model Review {
+  id         Int     @id @default(autoincrement())
+  content    String
+  quality    Int      @default(3)
+  fun        Int      @default(3)
+  movie      Movie    @relation(fields: [movieId], references: [id])
+  movieId    Int
+  user       User     @relation(fields: [userId], references: [id])
+  userId     Int
+}
+
+
+enum Role {
+  USER
+  ADMIN
+}
+
+model User {
+  id       Int      @id @default(autoincrement())
+  email    String   @unique
+  password String   // hashed
+  name     String?
+  role     Role     @default(USER)
+
+  reviews  Review[]
+}
