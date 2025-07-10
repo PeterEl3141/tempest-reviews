@@ -8,7 +8,10 @@ const jwt = require("jsonwebtoken");
 const app = express();
 const prisma = new PrismaClient();
 
-app.use(cors());
+app.use(cors({
+    origin: 'https://tempest-reviews.vercel.app',
+    credentials: true // if you're using cookies or auth headers
+  }));
 app.use(express.json());
 
 // Utility: Authenticate JWT token
