@@ -45,7 +45,7 @@ export default function WriteReview() {
     setLoading(true);
     try {
       await axios.post(
-        'http://localhost:4000/reviews',
+        `${API}/reviews`,
         {
           content,
           movieId: Number(selectedMovie),

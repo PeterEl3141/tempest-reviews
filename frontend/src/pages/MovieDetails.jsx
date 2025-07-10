@@ -19,7 +19,7 @@ export default function MovieDetails() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:4000/movies/${id}`)
+      .get(`${API}/movies/${id}`)
       .then((res) => {
         setMovie(res.data);
         setLoading(false);
