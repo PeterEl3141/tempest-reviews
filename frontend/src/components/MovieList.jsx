@@ -1,12 +1,13 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+const API = import.meta.env.VITE_API_URL;
 
 export default function MovieList() {
   const [movies, setMovies] = useState([]);
 
   useEffect(() => {
-    axios.get('http://localhost:4000/movies')
+    axios.get(`${API}/movies`)
       .then(res => setMovies(res.data))
       .catch(err => console.error('Error fetching movies:', err));
   }, []);

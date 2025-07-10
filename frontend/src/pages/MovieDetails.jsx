@@ -61,7 +61,7 @@ export default function MovieDetails() {
   const handleEditSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.put(`http://localhost:4000/movies/${movie.id}`, editForm, {
+      await axios.put(`${API}/movies/${movie.id}`, editForm, {
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
       });
       alert("Movie updated");
@@ -87,7 +87,7 @@ export default function MovieDetails() {
     e.preventDefault();
     try {
       await axios.put(
-        `http://localhost:4000/reviews/${editingReview}`,
+        `${API}/reviews/${editingReview}`,
         reviewForm,
         { headers: { Authorization: `Bearer ${localStorage.getItem('token')}` } }
       );
@@ -107,7 +107,7 @@ export default function MovieDetails() {
     if (!confirm('Delete this review?')) return;
     try {
       await axios.delete(
-        `http://localhost:4000/reviews/${id}`,
+        `${API}/reviews/${id}`,
         { headers: { Authorization: `Bearer ${localStorage.getItem('token')}` } }
       );
       alert('Review deleted!');
