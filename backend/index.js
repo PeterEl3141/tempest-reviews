@@ -249,7 +249,7 @@ app.delete("/reviews/:id", authenticateToken, async (req, res) => {
 });
 
 // ✅ Start server
-const PORT = process.env.PORT || 4000;
+const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
   console.log(`🚀 Backend running at http://localhost:${PORT}`);
 });
