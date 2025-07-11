@@ -33,9 +33,9 @@ export default function WriteReview() {
   const handleSubmit = async (e) => {
     e.preventDefault();
   
-    const token = localStorage.getItem('token'); // ✅ Move it *inside* the handler
+    const token = localStorage.getItem('token');
     console.log("🚀 Token being sent:", token);
-
+  
     if (!token) {
       alert("You're not authenticated!");
       return;
@@ -58,13 +58,12 @@ export default function WriteReview() {
         {
           content,
           movieId: Number(selectedMovie),
-          userId: user.id,
           quality,
           fun,
         },
         {
           headers: {
-            Authorization: `Bearer ${token}`, // ✅ Now should be correctly defined
+            Authorization: `Bearer ${token}`,
           },
         }
       );
@@ -81,6 +80,7 @@ export default function WriteReview() {
       setLoading(false);
     }
   };
+  
   
 
   return (
