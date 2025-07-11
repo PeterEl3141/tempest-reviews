@@ -5,8 +5,10 @@ import axios from 'axios';
 const API = import.meta.env.VITE_API_URL;
 
 
+
 export default function WriteReview() {
-  const { user, token } = useAuth();
+  const { user } = useAuth();
+  const token = localStorage.getItem('token');
   const [movies, setMovies] = useState([]);
   const [selectedMovie, setSelectedMovie] = useState('');
   const [content, setContent] = useState('');
