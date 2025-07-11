@@ -8,7 +8,6 @@ const API = import.meta.env.VITE_API_URL;
 
 export default function WriteReview() {
   const { user } = useAuth();
-  const token = localStorage.getItem('token');
   const [movies, setMovies] = useState([]);
   const [selectedMovie, setSelectedMovie] = useState('');
   const [content, setContent] = useState('');
@@ -35,7 +34,8 @@ export default function WriteReview() {
     e.preventDefault();
   
     const token = localStorage.getItem('token'); // ✅ Move it *inside* the handler
-  
+    console.log("🚀 Token being sent:", token);
+
     if (!token) {
       alert("You're not authenticated!");
       return;
