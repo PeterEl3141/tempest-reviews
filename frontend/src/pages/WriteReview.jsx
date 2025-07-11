@@ -33,17 +33,24 @@ export default function WriteReview() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
+    const token = localStorage.getItem('token'); // ✅ Move it *inside* the handler
+  
+    if (!token) {
+      alert("You're not authenticated!");
+      return;
+    }
+  
     if (!selectedMovie) {
       alert('Please select a movie');
       return;
     }
-
+  
     if (!content.trim()) {
       alert('Please write your review');
       return;
     }
-
+  
     setLoading(true);
     try {
       await axios.post(
@@ -57,16 +64,16 @@ export default function WriteReview() {
         },
         {
           headers: {
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${token}`, // ✅ Now should be correctly defined
           },
         }
       );
-
+  
       alert('Review submitted successfully!');
       setSelectedMovie('');
       setContent('');
       setQuality(3);
-      setFun(3)
+      setFun(3);
     } catch (error) {
       console.error('Error submitting review:', error);
       alert('Failed to submit review. Please try again.');
@@ -74,6 +81,7 @@ export default function WriteReview() {
       setLoading(false);
     }
   };
+  
 
   return (
     <div>
