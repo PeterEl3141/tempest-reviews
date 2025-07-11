@@ -18,32 +18,34 @@ export default function Signup() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      // Send signup request
       const res = await fetch(`${API}/signup`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(form),
       });
-
+  
       if (!res.ok) {
         throw new Error('Signup failed');
       }
-
-      // Assume backend returns the same as /login: { token, user }
+  
       const data = await res.json();
-
-      // Store token and user like in login
+  
+      // ✅ Store token and user
       localStorage.setItem('token', data.token);
       localStorage.setItem('user', JSON.stringify(data.user));
-
-      // Login via context to set headers and state
-      await login(form.email, form.password);
-
+  
+      // ✅ Set Axios default header immediately
+      axios.defaults.headers.common['Authorization'] = `Bearer ${data.token}`;
+  
+      // ✅ Update context manually
+      setUser(data.user);
+  
       navigate('/');
     } catch (err) {
       setError('Signup failed. Try a different email or check your input.');
     }
   };
+  
 
   return (
     <div>
